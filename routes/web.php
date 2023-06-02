@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
@@ -57,9 +56,6 @@ Route::controller(\App\Http\Controllers\CertificateController::class)->group(fun
     Route::put('/certificate/{id}', 'update')->name('certificate.update');
     Route::delete('/certificate/{id}', 'destroy')->name('certificate.destroy');
 });
-
-Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login/store', [LoginController::class, 'store'])->name('login.login');
 
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
