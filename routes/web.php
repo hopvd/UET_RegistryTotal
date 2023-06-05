@@ -29,16 +29,6 @@ Route::controller(VehicleController::class)->group(function () {
     Route::delete('/vehicle/{id}', 'destroy')->name('vehicle.destroy');
 });
 
-//Route::middleware('auth:api')->group(function () {
-    Route::controller(UserController::class)->group(function () {
-        Route::get('/users','index')->name('user.index');
-        Route::get('/user/{id}','show');
-        Route::post('/user','login')->name('user.login');
-        //    Route::put('/users/{id}', 'ApiController@updateUser');
-        //    Route::delete('/users/{id}', 'ApiController@deleteUser');
-    });
-//});
-
 // owner
 Route::controller(OwnerController::class)->group(function () {
     Route::get('/owners', 'index')->name('owner.index');

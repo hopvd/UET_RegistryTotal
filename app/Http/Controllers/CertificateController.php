@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class CertificateController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     public function index()
     {
         $certificate = Certificate::all();

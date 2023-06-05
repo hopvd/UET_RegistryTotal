@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CertificateController;
+use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\VehicleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +32,36 @@ Route::group([
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
     Route::post('/change-pass', [AuthController::class, 'changePassWord']);
+});
+
+Route::group([
+    'middleware' => 'api'
+], function ($router) {
+    Route::get('/vehicles', [VehicleController::class, 'index']);
+    Route::get('/vehicle/{id}', [VehicleController::class, 'show']);
+    Route::post('/vehicle', [VehicleController::class, 'store']);
+    Route::put('/vehicle/{id}', [VehicleController::class, 'update']);
+    Route::delete('/vehicle/{id}', [VehicleController::class, 'destroy']);
+});
+
+Route::group([
+    'middleware' => 'api'
+], function ($router) {
+    Route::get('/owners', [OwnerController::class, 'index']);
+    Route::get('/owner/{id}', [OwnerController::class, 'show']);
+    Route::post('/owner', [OwnerController::class, 'store']);
+    Route::put('/owner/{id}', [OwnerController::class, 'update']);
+    Route::delete('/owner/{id}', [OwnerController::class, 'destroy']);
+});
+
+Route::group([
+    'middleware' => 'api'
+], function ($router) {
+    Route::get('/certificates', [CertificateController::class, 'index']);
+    Route::get('/certificate/{id}', [CertificateController::class, 'show']);
+    Route::post('/certificate', [CertificateController::class, 'store']);
+    Route::put('/certificate/{id}', [CertificateController::class, 'update']);
+    Route::delete('/certificate/{id}', [CertificateController::class, 'destroy']);
 });
 
 
