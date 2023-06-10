@@ -58,6 +58,7 @@ Route::group([
     'middleware' => 'api'
 ], function ($router) {
     Route::get('/certificates', [CertificateController::class, 'index']);
+    Route::post('/certificate/getlist', [CertificateController::class, 'getList']);
     Route::get('/certificate/{id}', [CertificateController::class, 'show']);
     Route::post('/certificate', [CertificateController::class, 'store']);
     Route::put('/certificate/{id}', [CertificateController::class, 'update']);

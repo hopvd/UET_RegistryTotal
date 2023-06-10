@@ -7,14 +7,28 @@ use Illuminate\Http\Request;
 
 class CertificateController extends Controller
 {
+    protected $_data;
+
     public function __construct()
     {
         $this->middleware('auth:api');
+        $this->_data = new Certificate();
     }
 
     public function index()
     {
         $certificate = Certificate::all();
+
+        return response()->json([
+            'data' => $certificate,
+            'status' => 'success'
+        ]);
+    }
+
+    public function getList(Request $request)
+    {
+        $certificate = $this->_data->getData($request->input());
+//        dd($certificate);
 
         return response()->json([
             'data' => $certificate,
@@ -40,7 +54,7 @@ class CertificateController extends Controller
 
     public function show($id)
     {
-        $certificate = Certificate::find($id);
+        $certificate = $this->_data->findById($id);
 
         if (!$certificate) {
             return response()->json([
