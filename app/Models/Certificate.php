@@ -38,6 +38,13 @@ class Certificate extends Model
         if (!empty($request['location'])) {
             $certificate->where('location', '=', $request['location']);
         }
+        if (!empty($request['month_of_expried'])) {
+            $certificate->whereMonth('expired_date', $request['month_of_expired']);
+        }
+        if (!empty($request['year_of_expired'])) {
+            $certificate->whereYear('expired', $request['year_of_expired']);
+        }
+
 
 //        dd($certificate->get());
         return $certificate->get();
