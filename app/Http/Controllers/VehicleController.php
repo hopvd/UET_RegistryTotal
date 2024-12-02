@@ -17,10 +17,7 @@ class VehicleController extends Controller
     {
         $vehicle = Vehicle::all();
 
-        return response()->json([
-            'data' => $vehicle,
-            'status' => 'success'
-        ]);
+        return response()->json($vehicle);
     }
 
     public function store(Request $request)
@@ -36,10 +33,7 @@ class VehicleController extends Controller
 
         $vehicle->save();
 
-        return response()->json([
-            'data' => $vehicle,
-            'status' => 'success'
-        ]);
+        return response()->json($vehicle);
     }
 
 
@@ -54,10 +48,7 @@ class VehicleController extends Controller
             ], 404);
         }
 
-        return response()->json([
-            'data' => $vehicle,
-            'status' => 'success'
-        ]);
+        return response()->json($vehicle);
     }
 
     public function update(Request $request, $id)
@@ -80,10 +71,7 @@ class VehicleController extends Controller
         $vehicle->owner_id = $request->input('owner_id');
         $vehicle->save();
 
-        return response()->json([
-            'data' => $vehicle,
-            'status' => 'success'
-        ]);
+        return response()->json($vehicle);
     }
 
     public function destroy($id)

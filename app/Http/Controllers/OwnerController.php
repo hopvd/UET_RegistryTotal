@@ -16,10 +16,7 @@ class OwnerController extends Controller
     {
         $owner = Owner::all();
 
-        return response()->json([
-            'data' => $owner,
-            'status' => 'success'
-        ]);
+        return response()->json($owner);
     }
 
     public function store(Request $request)
@@ -34,10 +31,7 @@ class OwnerController extends Controller
 
         $owner->save();
 
-        return response()->json([
-            'data' => $owner,
-            'status' => 'success'
-        ]);
+        return response()->json($owner);
     }
 
     public function show($id)
@@ -51,10 +45,7 @@ class OwnerController extends Controller
             ], 404);
         }
 
-        return response()->json([
-            'data' => $owner,
-            'status' => 'success'
-        ]);
+        return response()->json($owner);
     }
 
     public function update(Request $request, $id)
@@ -76,10 +67,7 @@ class OwnerController extends Controller
         $owner->location = $request->input('location');
         $owner->save();
 
-        return response()->json([
-            'data' => $owner,
-            'status' => 'success'
-        ]);
+        return response()->json($owner);
     }
 
     public function destroy($id)

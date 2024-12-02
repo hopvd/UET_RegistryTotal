@@ -17,12 +17,20 @@ class CertificateController extends Controller
 
     public function index()
     {
-        $certificate = Certificate::all();
+        $certificate = $this->_data->select(
+            ['certificates.id',
+            'certificates.start_date',
+            'certificates.expired_date',
+            'vehicles.model',
+            'users.name',
+            'certificates.created_at',
+            'certificates.updated_at']
+        )
+            ->join('vehicles', 'certificates.vehicle_id', '=', 'vehicles.id')
+            ->join('users', 'certificates.user_id', '=', 'users.id')
+            ->get();
 
-        return response()->json([
-            'data' => $certificate,
-            'status' => 'success'
-        ]);
+        return response()->json($certificate);
     }
 
     public function getList(Request $request)
@@ -30,10 +38,7 @@ class CertificateController extends Controller
         $certificate = $this->_data->getData($request->input());
 //        dd($certificate);
 
-        return response()->json([
-            'data' => $certificate,
-            'status' => 'success'
-        ]);
+        return response()->json($certificate);
     }
 
     public function store(Request $request)
@@ -46,10 +51,7 @@ class CertificateController extends Controller
 
         $certificate->save();
 
-        return response()->json([
-            'data' => $certificate,
-            'status' => 'success'
-        ]);
+        return response()->json($certificate);
     }
 
     public function show($id)
@@ -63,10 +65,7 @@ class CertificateController extends Controller
             ], 404);
         }
 
-        return response()->json([
-            'data' => $certificate,
-            'status' => 'success'
-        ]);
+        return response()->json($certificate);
     }
 
     public function update(Request $request, $id)
@@ -86,10 +85,7 @@ class CertificateController extends Controller
         $certificate->user_id = $request->input('user_id');
         $certificate->save();
 
-        return response()->json([
-            'data' => $certificate,
-            'status' => 'success'
-        ]);
+        return response()->json($certificate);
     }
 
     public function destroy($id)
